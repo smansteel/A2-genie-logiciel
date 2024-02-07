@@ -7,6 +7,7 @@
     "build": "ng build",
     "dev": "ng build --watch --configuration development",
     "test": "ng test",
+    "lint": "eslint . --fix && prettier --write .",
     "serve:ssr:front": "node dist/front/server/server.mjs"
   },
   "private": true,
@@ -21,7 +22,9 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.7",
+    "d": "^1.0.1",
     "express": "^4.18.2",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -33,7 +36,11 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -41,6 +48,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "postcss": "^8.4.34",
+    "prettier": "3.2.5",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.2.2"
   }
