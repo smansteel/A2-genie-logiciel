@@ -27,7 +27,7 @@
     font-weight: 500;
     font-style: normal;
   }
-  
+
   @font-face {
     font-family: "Marianne";
     src: url("./assets/fonts/Marianne-Bold_Italic.woff2") format("woff2");
