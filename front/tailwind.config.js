@@ -2,9 +2,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     fontFamily: {
       marianne: ["Marianne", "system-ui"],
@@ -13,5 +11,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
-
+};
