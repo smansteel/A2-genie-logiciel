@@ -3,7 +3,6 @@
     "angular.ng-template",
     "mikestead.dotenv",
     "dbaeumer.vscode-eslint",
-    "heybourn.headwind",
     "csstools.postcss",
     "esbenp.prettier-vscode",
     "tomwhite007.rename-angular-component"
