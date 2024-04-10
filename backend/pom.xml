@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>fr.genepisep</groupId>
-    <artifactId>weberp-remaster</artifactId>
+    <artifactId>i-competences</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>weberp-remaster</name>
-    <description>Remaster WEB ERP ISEP</description>
+    <name>i-competences</name>
+    <description>Appli de gestion des compétences</description>
     <properties>
         <java.version>21</java.version>
     </properties>

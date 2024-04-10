@@ -1,13 +1,13 @@
-package fr.genepisep.weberpremaster;
+package fr.genepisep.icompetences;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WeberpRemasterApplication {
+public class iCompetences {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WeberpRemasterApplication.class, args);
+		SpringApplication.run(iCompetences.class, args);
 	}
 
 }
