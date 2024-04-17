@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public abstract class EntityService<T, R extends JpaRepository<T, Integer>> {
+
+    //WTF
     protected final R entityRepository;
 
     public EntityService(R entityRepository) {
