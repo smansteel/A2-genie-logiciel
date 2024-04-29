@@ -1,4 +1,10 @@
-database:
-    jdbc-string: ${DBSTRING}
-    user: ${DBUSER}
-    password: ${DBPASSWORD}
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+db:
+  username: ${db_username}
+  password: ${db_password}
+  string: ${db_string}
+
+jwt-secret: ${jwt_secret}

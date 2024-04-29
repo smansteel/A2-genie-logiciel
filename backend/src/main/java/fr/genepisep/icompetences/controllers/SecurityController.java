@@ -1,20 +1,19 @@
 package fr.genepisep.icompetences.controllers;
 
 import fr.genepisep.icompetences.dto.LoginDto;
-import fr.genepisep.icompetences.entities.dao.UserEntity;
 import fr.genepisep.icompetences.services.JwtService;
 import fr.genepisep.icompetences.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.security.auth.login.FailedLoginException;
 
-@Configuration
-@RequestMapping("login")
+@Controller
+@RequestMapping("auth")
 public class SecurityController {
 
     @Autowired
@@ -23,9 +22,15 @@ public class SecurityController {
     @Autowired
     JwtService jwtService;
 
-    @GetMapping()
+    @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDto login) throws FailedLoginException {
-        UserEntity user = loginService.loginUser(login.getIsepId(), login.getPassword());
-        return ResponseEntity.ok(jwtService.createToken(user.getIsepId()));
+        return ResponseEntity.ok(loginService.loginUser(login.getUsername(), login.getPassword()));
     }
+
+    @PostMapping("refresh")
+    public ResponseEntity<String> refresh(@RequestBody String refreshToken) {
+        return ResponseEntity.ok("refresh");
+    }
+
+
 }

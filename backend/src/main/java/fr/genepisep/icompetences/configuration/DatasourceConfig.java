@@ -4,28 +4,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class DatasourceConfig {
-    @Value("${database.user}")
+
+    @Value("${db.username}")
     String user;
 
-    @Value("${database.password}")
-    String password;
+    @Value("${db.password}")
+    String pass;
 
-    @Value("${database.jdbc-string}")
-    String jdbcString;
-
+    @Value("${db.string}")
+    String dbString;
     @Bean
-    @Primary
-    public DataSource datasource() {
-        return DataSourceBuilder.create()
-                .username(user)
-                .password(password)
-                .url(jdbcString)
-                .build();
+    public DataSource defaultDataSource() {
+        DataSourceBuilder<?> builder = DataSourceBuilder.create();
+        builder.driverClassName("org.postgresql.Driver");
+        builder.url(dbString);
+        builder.password(pass);
+        builder.username(user);
+        return builder.build();
     }
 }

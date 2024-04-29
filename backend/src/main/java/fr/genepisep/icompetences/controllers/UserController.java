@@ -1,17 +1,24 @@
 package fr.genepisep.icompetences.controllers;
 
-import fr.genepisep.icompetences.entities.dao.UserEntity;
-import fr.genepisep.icompetences.services.EntityService;
-import fr.genepisep.icompetences.services.UserService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import fr.genepisep.icompetences.dto.UserDto;
+import fr.genepisep.icompetences.mapper.UserMapper;
+import fr.genepisep.icompetences.security.IsepSecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
-@RequestMapping("user")
-public class UserController extends EntityController<UserEntity, UserService> {
-    protected UserController(UserService entityService) {
-        super(entityService);
+@Controller
+public class UserController {
+
+    @Autowired
+    IsepSecurityService isepSecurityService;
+
+    @GetMapping("me")
+    @ResponseBody
+    public ResponseEntity<UserDto> getUser() {
+        return ResponseEntity.ok(UserMapper.toDto(isepSecurityService.getCurrentUser()));
     }
+
 }
