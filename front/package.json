@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "dev": "ng build --watch --configuration development",
+    "dev": "ng serve --configuration=development",
     "test": "ng test",
     "lint": "eslint . --fix && prettier --write .",
     "serve:ssr:front": "node dist/front/server/server.mjs"
@@ -24,6 +23,7 @@
     "@angular/ssr": "^17.0.7",
     "d": "^1.0.1",
     "express": "^4.18.2",
+    "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
