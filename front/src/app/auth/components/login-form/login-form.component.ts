@@ -12,7 +12,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class LoginFormComponent {
   loginForm = this.fb.group({
-    email: ["", [Validators.required, Validators.email, Validators.minLength(5)]],
+    email: ["", [Validators.required, Validators.minLength(5)]],
     password: ["", [Validators.required, Validators.minLength(8)]],
   });
 

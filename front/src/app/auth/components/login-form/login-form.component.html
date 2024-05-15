@@ -1,14 +1,14 @@
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-primary-50 h-full w-full">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=600" alt="Your Company" />
-    <h2 class="text-gray-900 mt-6 text-center text-2xl font-bold leading-9 tracking-tight">Sign in to your account</h2>
+    <h2 class="text-gray-900 mt-6 text-center text-2xl font-bold leading-9 tracking-tight">Connectez-vous </h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
     <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
       <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
-          <label for="email" class="text-gray-900 block text-sm font-medium leading-6">Email address</label>
+          <label for="email" class="text-gray-900 block text-sm font-medium leading-6">Identifiant Isep ou adresse email</label>
           <div class="mt-2">
             <input
               id="email"
@@ -19,12 +19,12 @@
             />
           </div>
           @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
-            <label class="text-sm font-normal text-red-600">Un email est obligatoire</label>
+            <label class="text-sm font-normal text-red-600">Un identifiant ou email valide est obligatoire</label>
           }
         </div>
 
         <div>
-          <label for="password" class="text-gray-900 block text-sm font-medium leading-6">Password</label>
+          <label for="password" class="text-gray-900 block text-sm font-medium leading-6">Mot de passe</label>
           <div class="mt-2">
             <input
               id="password"
@@ -40,18 +40,8 @@
         </div>
 
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              class="border-gray-300 h-4 w-4 rounded text-primary-600 focus:ring-primary-600"
-            />
-            <label for="remember-me" class="text-gray-900 ml-3 block text-sm leading-6">Remember me</label>
-          </div>
-
           <div class="text-sm leading-6">
-            <a (click)="forgotPassword()" class="font-semibold text-primary-600 hover:text-primary-500 cursor-pointer">Forgot password?</a>
+            <a (click)="forgotPassword()" class="font-semibold text-primary-600 hover:text-primary-500 cursor-pointer">Mot de passe oublié ?</a>
           </div>
         </div>
 
@@ -60,15 +50,15 @@
             type="submit"
             class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
-            Sign in
+            Se connecter
           </button>
         </div>
       </form>
     </div>
 
     <p class="text-gray-500 mt-10 text-center text-sm">
-      No Account ?
-      <a (click)="register()" class="font-semibold leading-6 text-primary-600 hover:text-primary-500 cursor-pointer">Create now</a>
+      Pas de compte ?
+      <a (click)="register()" class="font-semibold leading-6 text-primary-600 hover:text-primary-500 cursor-pointer">Créez en un maintenant</a>
     </p>
   </div>
 </div>
