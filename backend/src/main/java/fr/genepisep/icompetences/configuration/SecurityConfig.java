@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.pattern.PathPatternParser;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -46,11 +47,21 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void configurePathMatch(PathMatchConfigurer configurer) {
+
                 PathPatternParser pathMatcher = new PathPatternParser();
                 pathMatcher.setMatchOptionalTrailingSeparator(true);
                 configurer.setPatternParser(pathMatcher);
             }
         };
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     CorsConfigurationSource apiConfigurationSource() {
