@@ -2,11 +2,12 @@ import { Component } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-login-form",
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: "./login-form.component.html",
   styleUrl: "./login-form.component.css",
 })
@@ -15,6 +16,7 @@ export class LoginFormComponent {
     email: ["", [Validators.required, Validators.minLength(5)]],
     password: ["", [Validators.required]],
   });
+  status = "";
 
   constructor(
     private router: Router,
@@ -22,11 +24,12 @@ export class LoginFormComponent {
     private fb: FormBuilder,
   ) {}
 
-  login() {
+  async login() {
+    this.status = "loading";
     const formValues = this.loginForm.value;
     if (this.loginForm.invalid) return;
 
-    this.auth.login(formValues.email!, formValues.password!);
+    this.status = await this.auth.login(formValues.email!, formValues.password!);
   }
 
   register() {
