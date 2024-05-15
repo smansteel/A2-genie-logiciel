@@ -18,6 +18,9 @@
               class="text-gray-900 ring-gray-300 placeholder:text-gray-400 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
             />
           </div>
+          @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
+            <label class="text-sm font-normal text-red-600">Un mot de passe est obligatoire</label>
+          }
         </div>
 
         <div>
@@ -31,6 +34,9 @@
               class="text-gray-900 ring-gray-300 placeholder:text-gray-400 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
             />
           </div>
+          @if (loginForm.get("password")?.errors && loginForm.get("password")?.touched) {
+            <label class="text-sm font-normal text-red-600">Un mot de passe fort est obligatoire</label>
+          }
         </div>
 
         <div class="flex items-center justify-between">
@@ -45,7 +51,7 @@
           </div>
 
           <div class="text-sm leading-6">
-            <a (click)="forgotPassword()" class="font-semibold text-primary-600 hover:text-primary-500">Forgot password?</a>
+            <a (click)="forgotPassword()" class="font-semibold text-primary-600 hover:text-primary-500 cursor-pointer">Forgot password?</a>
           </div>
         </div>
 
@@ -62,7 +68,7 @@
 
     <p class="text-gray-500 mt-10 text-center text-sm">
       No Account ?
-      <a (click)="register()" class="font-semibold leading-6 text-primary-600 hover:text-primary-500">Create now</a>
+      <a (click)="register()" class="font-semibold leading-6 text-primary-600 hover:text-primary-500 cursor-pointer">Create now</a>
     </p>
   </div>
 </div>
