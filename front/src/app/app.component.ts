@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Router, RouterOutlet, Event, NavigationEnd } from "@angular/router";
 
 import { IStaticMethods } from "preline/preline";
+import { NotificationsComponent } from "./shared/components/notifications/notifications.component";
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -12,7 +13,7 @@ declare global {
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, NotificationsComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })

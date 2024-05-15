@@ -37,9 +37,9 @@ export class AuthService {
         this.logout();
         return "Incorrect JWT";
       }
-    } catch (error) {
+    } catch (error : any) {
       console.error("HTTP Error:", error);
-      return String(error);
+      return String(error.message);
     }
   }
 

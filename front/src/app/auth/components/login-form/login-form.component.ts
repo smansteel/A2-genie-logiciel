@@ -3,6 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { CommonModule } from "@angular/common";
+import { NotificationsService } from "../../../shared/services/notifications/notifications.service";
+import { NotificationType } from "../../../shared/types/notification.type";
 
 @Component({
   selector: "app-login-form",
@@ -16,20 +18,28 @@ export class LoginFormComponent {
     email: ["", [Validators.required, Validators.minLength(5)]],
     password: ["", [Validators.required]],
   });
-  status = "";
 
   constructor(
     private router: Router,
     private auth: AuthService,
     private fb: FormBuilder,
+    private notification: NotificationsService,
   ) {}
 
   async login() {
-    this.status = "loading";
     const formValues = this.loginForm.value;
     if (this.loginForm.invalid) return;
 
-    this.status = await this.auth.login(formValues.email!, formValues.password!);
+    const result = await this.auth.login(formValues.email!, formValues.password!);
+    if (result === "OK") {
+      this.router.navigate(["/"]);
+    } else {
+      this.notification.add({
+        type: NotificationType.Error,
+        title: "Impossible de se connecter",
+        description: result,
+      });
+    }
   }
 
   register() {

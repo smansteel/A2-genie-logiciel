@@ -5,7 +5,7 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 !transition-all">
       <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
           <label for="email" class="text-gray-900 block text-sm font-medium leading-6">Identifiant Isep ou adresse email</label>
@@ -50,46 +50,10 @@
         <div>
           <button
             type="submit"
-            [ngClass]="status === 'loading' ? 'cursor-wait: opacity-50' : ''"
             class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
             Se connecter
           </button>
-          @if (status === "" || status === "loading") {
-          } @else {
-            <div
-              class="mt-5 max-w-xs rounded-lg border border-red-200 bg-red-100 text-sm text-red-800 dark:border-red-900 dark:bg-red-800/10 dark:text-red-500"
-              role="alert"
-            >
-              <div class="flex p-4">
-                {{ status }}
-
-                <div class="ms-auto">
-                  <button
-                    type="button"
-                    class="inline-flex size-5 flex-shrink-0 items-center justify-center rounded-lg text-red-800 opacity-50 hover:opacity-100 focus:opacity-100 focus:outline-none dark:text-red-200"
-                  >
-                    <span class="sr-only">Close</span>
-                    <svg
-                      class="size-4 flex-shrink-0"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M18 6 6 18"></path>
-                      <path d="m6 6 12 12"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          }
         </div>
       </form>
     </div>
