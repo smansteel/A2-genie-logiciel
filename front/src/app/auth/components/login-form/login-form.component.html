@@ -19,7 +19,7 @@
             />
           </div>
           @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
-            <label class="text-sm font-normal text-red-600">Un mot de passe est obligatoire</label>
+            <label class="text-sm font-normal text-red-600">Un email est obligatoire</label>
           }
         </div>
 
@@ -35,7 +35,7 @@
             />
           </div>
           @if (loginForm.get("password")?.errors && loginForm.get("password")?.touched) {
-            <label class="text-sm font-normal text-red-600">Un mot de passe fort est obligatoire</label>
+            <label class="text-sm font-normal text-red-600">Un mot de passe est obligatoire</label>
           }
         </div>
 
