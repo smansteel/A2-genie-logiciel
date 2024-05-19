@@ -25,15 +25,21 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string) {
-    const response = await lastValueFrom(this.http.post<{ accessToken: string }>("auth/login", { email, password }));
+  async login(username: string, password: string): Promise<string> {
+    try {
+      const response = await lastValueFrom(this.http.post<{ accessToken: string }>("auth/login", { username, password }));
 
-    if (this.isTokenValid(response.accessToken)) {
-      window.localStorage.setItem("access_token", this.accessToken);
-      this.accessToken = response.accessToken;
-    } else {
-      this.logout();
-      throw new Error("Incorrect JWT");
+      if (this.isTokenValid(response.accessToken)) {
+        window.localStorage.setItem("access_token", this.accessToken);
+        this.accessToken = response.accessToken;
+        return "OK";
+      } else {
+        this.logout();
+        return "Incorrect JWT";
+      }
+    } catch (error : any) {
+      console.error("HTTP Error:", error);
+      return String(error.message);
     }
   }
 

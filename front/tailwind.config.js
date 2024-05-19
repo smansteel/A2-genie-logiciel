@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{html,ts}"],
+  plugins: [require("@tailwindcss/forms"), require("preline/plugin")],
+  content: ["./src/**/*.{html,ts}", "node_modules/preline/dist/*.js"],
+  darkMode: "class",
   theme: {
     fontFamily: {
       marianne: ["Marianne", "system-ui"],
@@ -12,6 +14,19 @@ module.exports = {
       current: "currentColor",
       white: "#ffffff",
       black: "#030a1e",
+      gray: {
+        50: "#f9fafb",
+        100: "#f3f4f6",
+        200: "#e5e7eb",
+        300: "#d1d5db",
+        400: "#9ca3af",
+        500: "#6b7280",
+        600: "#4b5563",
+        700: "#374151",
+        800: "#1f2937",
+        900: "#111827",
+        950: "#030712",
+      },
       primary: {
         50: "#f0f9ff",
         100: "#dff1ff",
@@ -66,5 +81,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };
