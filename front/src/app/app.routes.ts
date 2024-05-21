@@ -16,6 +16,10 @@ export const routes: Routes = [
       import("./auth/components/recover-password/recover-password.component").then(m => m.RecoverPasswordComponent),
   },
   {
+    path: "wallet/:id",
+    loadComponent: () => import("./core/wallet/components/wallet-page/wallet-page.component").then(m => m.WalletPageComponent),
+  },
+  {
     path: "**",
     redirectTo: "home",
   },
