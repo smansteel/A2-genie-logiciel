@@ -1,8 +1,8 @@
 export enum Skill {
-  TRASH = "Trash",
-  FAR = "Far",
-  MIDRANGE = "Midrange",
-  CLOSE = "Close",
-  ACQUIRED = "Acquired",
-  BEYOND = "Beyond",
+  INVALIDED = "Invalided",  // 0
+  FAR = "Far",              // 6
+  MIDRANGE = "Midrange",    // 10
+  CLOSE = "Close",          // 12
+  ACQUIRED = "Acquired",    // 16
+  BEYOND = "Beyond",        // 20
 }
