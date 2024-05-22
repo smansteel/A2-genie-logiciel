@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CompetenciesTableComponent } from './competencies-table.component';
 
 describe('CompetenciesTableComponent', () => {

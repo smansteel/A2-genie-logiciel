@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-competency-row',
+  selector: 'tr[competency-row]',
   standalone: true,
   imports: [],
   templateUrl: './competency-row.component.html',
