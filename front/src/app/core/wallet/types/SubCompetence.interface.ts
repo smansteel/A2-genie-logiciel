@@ -4,5 +4,5 @@ export interface SubCompetence {
   id: number;
   name: string;
   description: string;
-  skill: Skill;
+  skill: Skill | null;
 }
