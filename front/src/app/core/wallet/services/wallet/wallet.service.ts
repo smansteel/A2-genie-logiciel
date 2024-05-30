@@ -1,4 +1,4 @@
-import { Injectable, OnInit, WritableSignal, signal } from "@angular/core";
+import { Injectable, WritableSignal, signal } from "@angular/core";
 import { Wallet } from "../../types/Wallet.interface";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -13,7 +13,7 @@ export class WalletService {
   constructor(private http: HttpClient) {}
 
   public async fetchWallet(walletID: string): Promise<Wallet> {
-    const wallet = await this.getFakeWallet();
+    const wallet : Wallet = await this.getFakeWallet();
     this.wallet.set(wallet);
     console.log("here");
     return wallet;
@@ -195,7 +195,7 @@ export class WalletService {
       ],
     };
 
-    const randomTimeout = Math.floor(Math.random() * (400 - 200 + 1)) + 200;
+    const randomTimeout = Math.floor(Math.random() * (400 - 200 + 1)) + 400;
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(wallet);
