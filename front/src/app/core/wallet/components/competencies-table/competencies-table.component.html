@@ -1,0 +1,31 @@
+<table class="min-w-full">
+  <thead class="bg-white">
+    <tr>
+      <th scope="col" class="w-1/4 py-3.5 pl-4 pr-3 text-left font-medium text-gray-900 sm:pl-3">Compétence</th>
+      <th scope="col" class="w-1/2 px-3 py-3.5 text-left font-medium text-gray-900">Description</th>
+      <th scope="col" class="w-1/5 px-3 py-3.5 text-left font-medium text-gray-900">Niveau</th>
+      <th scope="col" class="relative w-fit py-3.5 pl-3 pr-4 sm:pr-3">
+        <span class="sr-only">Edit</span>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="bg-white *:border-t *:border-gray-200">
+    @for (competence of wallet.competencies; track $index) {
+      <tr class="">
+        <th colspan="1" scope="colgroup" class="bg-gray-50 py-3 pl-4 pr-3 text-left text-sm font-medium text-gray-900 sm:pl-3">
+          {{ competence.name }}
+        </th>
+        <th colspan="3" scope="colgroup" class="bg-gray-50 py-3 pl-4 pr-3 text-left text-sm font-medium text-gray-900 sm:pl-3">
+          {{ competence.description }}
+        </th>
+      </tr>
+
+      @for (subCompetence of competence.subCompetencies; track $index) {
+        <tr competency-row [subCompetence]="subCompetence"></tr>
+      }
+    }
+
+    <!-- More people... -->
+  </tbody>
+</table>
