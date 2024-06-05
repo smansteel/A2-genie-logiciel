@@ -3,6 +3,7 @@ import { Wallet } from "../../types/Wallet.interface";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { firstValueFrom, lastValueFrom } from "rxjs";
+import { Skill } from "../../types/Skill.enum";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,7 @@ export class WalletService {
   constructor(private http: HttpClient) {}
 
   public async fetchWallet(walletID: string): Promise<Wallet> {
-    const wallet : Wallet = await this.getFakeWallet();
+    const wallet: Wallet = await this.getFakeWallet();
     this.wallet.set(wallet);
     console.log("here");
     return wallet;
@@ -59,19 +60,19 @@ export class WalletService {
               id: 1,
               name: "Fonctionnement d'un microcontrôleur",
               description: "Comprendre le fonctionnement d'un microcontrôleur",
-              skill: null,
+              skill: Skill.MIDRANGE,
             },
             {
               id: 2,
               name: "Utilisation d'un multimètre",
               description: "Savoir utiliser un multimètre",
-              skill: null,
+              skill: Skill.BEYOND,
             },
             {
               id: 3,
               name: "Réalisation d'un circuit imprimé",
               description: "Savoir réaliser un circuit imprimé",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
             {
               id: 4,
@@ -83,7 +84,7 @@ export class WalletService {
               id: 5,
               name: "Soutenances",
               description: "Savoir présenter et vendre un projet",
-              skill: null,
+              skill: Skill.FAR,
             },
           ],
         },
@@ -96,13 +97,13 @@ export class WalletService {
               id: 1,
               name: "Algo de détéction de bruit",
               description: "Savoir réaliser un algorithme de détection de bruit sur Matlab",
-              skill: null,
+              skill: Skill.CLOSE,
             },
             {
               id: 2,
               name: "Traitement de signal",
               description: "Savoir traiter un signal",
-              skill: null,
+              skill: Skill.CLOSE,
             },
             {
               id: 3,
@@ -114,7 +115,7 @@ export class WalletService {
               id: 4,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
           ],
         },
@@ -127,13 +128,13 @@ export class WalletService {
               id: 1,
               name: "Pages statiques",
               description: "Réaliser les page de base d'un site web",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
             {
               id: 2,
               name: "Pages dynamiques",
               description: "Réaliser des pages dynamiques",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
             {
               id: 3,
@@ -145,13 +146,13 @@ export class WalletService {
               id: 4,
               name: "Sécurité",
               description: "Savoir sécuriser un site web et se protéger des attaques",
-              skill: null,
+              skill: Skill.BEYOND,
             },
             {
               id: 5,
               name: "Backend",
               description: "Savoir réaliser un backend en php",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
             {
               id: 6,
@@ -163,7 +164,7 @@ export class WalletService {
               id: 7,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.ACQUIRED,
             },
           ],
         },
@@ -182,13 +183,13 @@ export class WalletService {
               id: 2,
               name: "Passerelle",
               description: "Faire communiquer la carte TIVA et le site web",
-              skill: null,
+              skill: Skill.MIDRANGE,
             },
             {
               id: 3,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.CLOSE,
             },
           ],
         },

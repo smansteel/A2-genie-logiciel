@@ -1,8 +1,8 @@
 export enum Skill {
-  INVALIDED = "Invalided",  // 0
-  FAR = "Far",              // 6
-  MIDRANGE = "Midrange",    // 10
-  CLOSE = "Close",          // 12
-  ACQUIRED = "Acquired",    // 16
-  BEYOND = "Beyond",        // 20
+  INVALIDED = "Non Validé", // 0
+  FAR = "Loin", // 6
+  MIDRANGE = "Proche", // 10
+  CLOSE = "Très Proche", // 12
+  ACQUIRED = "Attendu", // 16
+  BEYOND = "Au-delà", // 20
 }
