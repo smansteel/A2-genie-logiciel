@@ -1,12 +1,51 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { IsepModule } from "../../../../shared/types/IsepModule.type";
+import { ModuleService } from "../../services/module-service/module.service";
+import { NgForOf } from "@angular/common";
+import { MatDialog } from "@angular/material/dialog";
+import { NewWalletPopupComponent } from "../new-wallet-popup/new-wallet-popup.component";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-module-page',
+  selector: "app-module-page",
   standalone: true,
-  imports: [],
-  templateUrl: './module-page.component.html',
-  styleUrl: './module-page.component.css'
+  imports: [NgForOf],
+  templateUrl: "./module-page.component.html",
+  styleUrl: "./module-page.component.css",
 })
 export class ModulePageComponent {
+  module: IsepModule;
 
+  constructor(
+    private moduleService: ModuleService,
+    private dialog: MatDialog,
+    private router: Router,
+  ) {
+    this.module = this.moduleService.getEmptyModule();
+    this.moduleService.fetchModule("1").then(r => {
+      this.module = r;
+    });
+  }
+
+  onNewWalletClk() {
+    const dia = this.dialog.open(NewWalletPopupComponent);
+
+    dia.afterClosed().subscribe(result => {
+      if (result.name && result.description) {
+        this.module.wallets.push({
+          id: this.module.wallets.length + 1,
+          name: result.name,
+          description: result.description,
+          authorizedEditorsID: [],
+          competencies: [],
+        });
+      }
+    });
+  }
+
+  viewWallet(id: number) {
+    if (id) {
+      this.router.navigate(["/wallet/" + id]);
+    }
+  }
 }

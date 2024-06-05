@@ -2,23 +2,23 @@ import { Injectable, signal, WritableSignal } from "@angular/core";
 
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
-import { Module } from "../../../../shared/types/Module.type";
+import { IsepModule } from "../../../../shared/types/IsepModule.type";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModuleService {
-  public module: WritableSignal<Module | null> = signal(null);
+  public module: WritableSignal<IsepModule | null> = signal(null);
 
   constructor(private http: HttpClient) {}
 
-  public async fetchModule(moduleID: string): Promise<Module> {
-    const module: Module = await this.getFakeModule();
+  public async fetchModule(moduleID: string): Promise<IsepModule> {
+    const module: IsepModule = await this.getFakeModule();
     this.module.set(module);
     return module;
 
     try {
-      const module = await firstValueFrom(this.http.get<Module>("module/" + moduleID));
+      const module = await firstValueFrom(this.http.get<IsepModule>("module/" + moduleID));
       this.module.set(module);
       return module;
     } catch (error) {
@@ -26,17 +26,17 @@ export class ModuleService {
     }
   }
 
-  public async addModule(module: Module): Promise<Module> {
+  public async addModule(module: IsepModule): Promise<IsepModule> {
     try {
-      return await firstValueFrom(this.http.put<Module>("module/" + module.id, module));
+      return await firstValueFrom(this.http.put<IsepModule>("module/" + module.id, module));
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to edit module", error: error });
     }
   }
 
-  public async editModule(module: Module): Promise<Module> {
+  public async editModule(module: IsepModule): Promise<IsepModule> {
     try {
-      return await firstValueFrom(this.http.patch<Module>("module/" + module.id, module));
+      return await firstValueFrom(this.http.patch<IsepModule>("module/" + module.id, module));
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to edit module", error: error });
     }
@@ -44,13 +44,29 @@ export class ModuleService {
 
   public async deleteModule(moduleID: string) {
     try {
-      return await firstValueFrom(this.http.delete<Module>("module/" + moduleID));
+      return await firstValueFrom(this.http.delete<IsepModule>("module/" + moduleID));
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to delete module", error: error });
     }
   }
 
   private async getFakeModule() {
-    return { id: 1, name: "Test module", description: "Test short description" };
+    return {
+      id: "1",
+      name: "Test module",
+      description: "Test short description",
+      responsable: undefined,
+      wallets: [],
+    } as IsepModule;
+  }
+
+  getEmptyModule() {
+    return {
+      id: "XXX",
+      name: "XXX",
+      description: "XXX",
+      responsable: undefined,
+      wallets: [],
+    } as IsepModule;
   }
 }

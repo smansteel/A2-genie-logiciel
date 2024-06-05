@@ -1,7 +1,6 @@
-import { Component, Inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogClose, MatDialogRef } from "@angular/material/dialog";
-import { Module } from "../../../../shared/types/Module.type";
+import { MatDialogClose, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-new-module-popup",
@@ -11,12 +10,5 @@ import { Module } from "../../../../shared/types/Module.type";
   styleUrl: "./new-module-popup.component.css",
 })
 export class NewModulePopupComponent {
-  constructor(
-    public dialog: MatDialogRef<NewModulePopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public module: Module,
-  ) {}
-
-  closeDialog() {
-    this.dialog.close();
-  }
+  constructor(public dialog: MatDialogRef<NewModulePopupComponent>) {}
 }

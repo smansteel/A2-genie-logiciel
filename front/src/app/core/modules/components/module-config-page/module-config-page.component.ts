@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NgForOf, NgIf } from "@angular/common";
-import { Module } from "../../../../shared/types/Module.type";
+import { IsepModule } from "../../../../shared/types/IsepModule.type";
 import { NewModulePopupComponent } from "../new-module-popup/new-module-popup.component";
 import { MatDialog } from "@angular/material/dialog";
 import { ModuleService } from "../../services/module-service/module.service";
@@ -14,8 +14,7 @@ import { Router } from "@angular/router";
   styleUrl: "./module-config-page.component.css",
 })
 export class ModuleConfigPageComponent {
-  modules: Module[] = [];
-  newModule: Module = {};
+  modules: IsepModule[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -28,21 +27,23 @@ export class ModuleConfigPageComponent {
   }
 
   onNewModuleClk() {
-    const dia = this.dialog.open(NewModulePopupComponent, {
-      data: { module: this.newModule },
-    });
+    const dia = this.dialog.open(NewModulePopupComponent);
 
     dia.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-      this.newModule = result;
-      if (this.newModule.name && this.newModule.description) {
-        this.modules.push(this.newModule);
-        this.newModule = {};
+      if (result.name && result.description) {
+        this.modules.push({
+          id: (this.modules.length + 1).toString(),
+          name: result.name,
+          description: result.description,
+          wallets: [],
+        } as IsepModule);
       }
     });
   }
 
-  viewModule(id: number | undefined) {
-    this.router.navigate(["/admin/module/" + id]);
+  viewModule(id: string | undefined) {
+    if (id) {
+      this.router.navigate(["/admin/module/" + id]);
+    }
   }
 }

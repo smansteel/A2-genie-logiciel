@@ -13,10 +13,10 @@
       <div class="w-full h-fit flex flex-row place-content-between">
         <div class="flex flex-col gap-2 w-1/2 h-fit">
           <div class="underline font-bold">
-            {{module.name}}
+            {{ module.name }}
           </div>
           <div>
-            {{module.description}}
+            {{ module.description }}
           </div>
         </div>
         <div>
@@ -25,8 +25,8 @@
               Responsable
             </div>
             <div *ngIf="module.responsable">
-              {{module.responsable.name}}
-              {{module.responsable.firstName}}
+              {{ module.responsable.name }}
+              {{ module.responsable.firstName }}
             </div>
           </div>
         </div>
