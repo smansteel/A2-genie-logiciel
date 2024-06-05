@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Skill } from "../../types/Skill.enum";
-import { CommonModule } from "@angular/common";
+import { CommonModule, KeyValue } from "@angular/common";
 
 @Component({
   selector: "app-competence-level-chip",
@@ -15,6 +15,11 @@ export class CompetenceLevelChipComponent implements OnInit {
   isExpanded: boolean = false;
   Skills = Skill;
 
+  customOrder = ["Au-delà", "Attendu", "Très Proche", "Proche", "Loin", "Non Validé"];
+  customSort = (a: KeyValue<string, any>, b: KeyValue<string, any>): number => {
+    return this.customOrder.indexOf(a.value.name) + this.customOrder.indexOf(b.value.name);
+  };
+
   ngOnInit(): void {
     console.log(this.skill);
   }
@@ -23,5 +28,9 @@ export class CompetenceLevelChipComponent implements OnInit {
     if (!this.isEditable) return;
 
     this.isExpanded = !this.isExpanded;
+  }
+
+  editCompetence(newSkill: Skill) {
+    this.skill = newSkill;
   }
 }

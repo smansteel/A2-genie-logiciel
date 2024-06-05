@@ -3,15 +3,15 @@
   <div class="relative">
     <div class="inline-flex w-2/3 divide-x divide-primary-200 rounded-md">
       <!-- Button Text with Icon -->
-      <div class="inline-flex w-full items-center gap-x-1.5 rounded-l-md bg-primary-100 px-3 py-2 text-primary-600">
-        <svg class="-ml-0.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path
-            fill-rule="evenodd"
-            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <p class="w-full text-sm font-semibold">{{ skill }}</p>
+      <div
+        class="inline-flex w-full items-center gap-x-1.5 px-3 py-2 text-primary-600"
+        [ngClass]="[isEditable ? 'rounded-l-md' : 'rounded-md', skill ? 'bg-primary-100' : 'border-2 border-primary-100']"
+      >
+        @if (skill) {
+          <p class="w-full text-sm font-semibold">{{ skill }}</p>
+        } @else {
+          <p class="w-full text-sm font-light italic text-gray-400">Non noté</p>
+        }
       </div>
 
       <!-- Edit Icon  -->
@@ -37,65 +37,67 @@
       }
     </div>
 
-    <ul
-      [ngClass]="isExpanded ? 'opacity-100' : 'opacity-0'"
-      (blur)="toggleEdit()"
-      class="absolute right-0 z-10 mt-2 w-80 origin-top-right -translate-x-[5.25rem] divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition duration-200 ease-in focus:outline-none"
-      tabindex="-1"
-      role="listbox"
-      aria-labelledby="listbox-label"
-      aria-activedescendant="listbox-option-0"
-    >
-      @for (Skill of Skills | keyvalue; track $index) {
-        <li
-          class="cursor-default select-none p-4 text-sm text-gray-900 transition-all"
-          [ngClass]="skill == Skill.value ? 'bg-primary-600 text-white' : '!cursor-pointer text-gray-900 hover:bg-primary-50'"
-          id="listbox-option-0"
-          role="option"
-        >
-          <div class="flex flex-col">
-            <div class="flex justify-between">
-              <p class="" [ngClass]="skill == Skill.value ? 'font-semibold' : 'font-normal'">{{ Skill.value }}</p>
-              <span class="text-primary-600" [ngClass]="skill == Skill.value ? 'text-white' : 'text-primary-600'">
-                @if (skill == Skill.value) {
-                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+    @if (isExpanded) {
+      <ul
+        [ngClass]="isExpanded ? 'opacity-100' : 'opacity-0'"
+        (blur)="toggleEdit()"
+        class="absolute right-0 z-10 mt-2 w-80 origin-top-right -translate-x-[5.25rem] divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition duration-200 ease-in focus:outline-none"
+        tabindex="-1"
+        role="listbox"
+        aria-labelledby="listbox-label"
+        aria-activedescendant="listbox-option-0"
+      >
+        @for (Skill of Skills | keyvalue: customSort; track $index) {
+          <li
+            class="select-none p-3 text-sm text-gray-900 transition-all"
+            [ngClass]="skill == Skill.value ? 'bg-primary-600 text-white' : 'cursor-pointer text-gray-900 hover:bg-primary-50'"
+            role="option"
+            (click)="editCompetence(Skill.value)"
+          >
+            <div class="flex flex-col">
+              <div class="flex justify-between">
+                <p class="" [ngClass]="skill == Skill.value ? 'font-semibold' : 'font-normal'">{{ Skill.value }}</p>
+                <span class="text-primary-600" [ngClass]="skill == Skill.value ? 'text-white' : 'text-primary-600'">
+                  @if (skill == Skill.value) {
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  }
+                </span>
+              </div>
+              <p
+                class="mt-1 text-wrap text-sm text-gray-500"
+                [ngClass]="skill == Skill.value ? 'text-primary-200' : 'text-gray-500'"
+              >
+                @switch (Skill.value) {
+                  @case (Skills.EXPECTED) {
+                    L'étudiant a validé sa compétence
+                  }
+                  @case (Skills.BEYOND) {
+                    L'étudiant est trop fort
+                  }
+                  @case (Skills.VERY_CLOSE) {
+                    L'étudiant est très proche
+                  }
+                  @case (Skills.CLOSE) {
+                    L'étudiant est proche
+                  }
+                  @case (Skills.FAR) {
+                    L'étudiant est loin (rip)
+                  }
+                  @case (Skills.INVALIDED) {
+                    L'étudiant a raté, virez le
+                  }
                 }
-              </span>
+              </p>
             </div>
-            <p
-              class="mt-2 text-wrap text-sm text-gray-500"
-              [ngClass]="skill == Skill.value ? 'text-primary-200' : 'text-gray-500'"
-            >
-              @switch (Skill.value) {
-                @case (Skills.ACQUIRED) {
-                  L'étudiant a validé sa compétence
-                }
-                @case (Skills.BEYOND) {
-                  L'étudiant est trop fort
-                }
-                @case (Skills.CLOSE) {
-                  L'étudiant est très proche
-                }
-                @case (Skills.MIDRANGE) {
-                  L'étudiant est proche
-                }
-                @case (Skills.FAR) {
-                  L'étudiant est loin (rip)
-                }
-                @case (Skills.INVALIDED) {
-                  L'étudiant a raté, virez le
-                }
-              }
-            </p>
-          </div>
-        </li>
-      }
-    </ul>
+          </li>
+        }
+      </ul>
+    }
   </div>
 </div>
