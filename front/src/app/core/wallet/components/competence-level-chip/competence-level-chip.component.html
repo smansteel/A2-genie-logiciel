@@ -4,8 +4,8 @@
     <div class="inline-flex w-2/3 divide-x divide-primary-200 rounded-md">
       <!-- Button Text with Icon -->
       <div
-        class="inline-flex w-full items-center gap-x-1.5 px-3 py-2 text-primary-600"
-        [ngClass]="[isEditable ? 'rounded-l-md' : 'rounded-md', skill ? 'bg-primary-100' : 'border-2 border-primary-100']"
+        class="inline-flex w-full items-center gap-x-1.5 px-3 py-2"
+        [ngClass]="[isEditable ? 'rounded-l-md' : 'rounded-md', skill ? 'bg-primary-100' : 'cursor-default bg-gray-50']"
       >
         @if (skill) {
           <p class="w-full text-sm font-semibold">{{ skill }}</p>
