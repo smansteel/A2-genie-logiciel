@@ -21,6 +21,11 @@ export const routes: Routes = [
   },
   {
     path: "admin/modules",
+    loadComponent: () =>
+      import("./core/modules/components/module-config-page/module-config-page.component").then(m => m.ModuleConfigPageComponent),
+  },
+  {
+    path: "admin/module/:id",
     loadComponent: () => import("./core/modules/components/module-page/module-page.component").then(m => m.ModulePageComponent),
   },
   {
