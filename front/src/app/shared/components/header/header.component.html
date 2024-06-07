@@ -1,0 +1,12 @@
+<div class="top-0 flex items-center min-w-full bg-gray-400 flex-row-reverse p-1.5 max-h-14 h-14">
+  @defer (when user){
+    <div class="flex flex-col p-1.5">
+      <span class="decoration-white font text-xs">Bienvenue, </span>
+      <span class="decoration-white font text-sm">{{user?.name}}</span>
+    </div>
+  } @placeholder {
+    <button type="button" class="flex h-10 decoration-whiteblock rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">
+      Se connecter
+    </button>
+  }
+</div>

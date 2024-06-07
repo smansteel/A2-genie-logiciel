@@ -4,11 +4,12 @@ import { Wallet } from "../../types/Wallet.interface";
 import { WalletService } from "../../services/wallet/wallet.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LoadingTableComponent } from "../loading-table/loading-table.component";
+import { HeaderComponent } from "../../../../shared/components/header/header.component";
 
 @Component({
   selector: "app-wallet-page",
   standalone: true,
-  imports: [CompetenciesTableComponent, LoadingTableComponent],
+  imports: [CompetenciesTableComponent, LoadingTableComponent, HeaderComponent],
   templateUrl: "./wallet-page.component.html",
   styleUrl: "./wallet-page.component.css",
 })
