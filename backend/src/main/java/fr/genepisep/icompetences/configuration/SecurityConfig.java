@@ -15,8 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
 import org.springframework.security.web.SecurityFilterChain;
+
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
 
 @Configuration
 @EnableWebSecurity
@@ -42,6 +44,7 @@ public class SecurityConfig {
     }
 
     @Bean
+
     public CasAuthenticationProvider casAuthenticationProvider(IsepUserDetailsService userDetailsService) {
         CasAuthenticationProvider provider = new CasAuthenticationProvider();
         provider.setAuthenticationUserDetailsService(new UserDetailsByNameServiceWrapper<>(userDetailsService));
