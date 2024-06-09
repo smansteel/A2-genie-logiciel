@@ -6,7 +6,7 @@ import { provideClientHydration } from "@angular/platform-browser";
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from "@angular/common/http";
 import { authInterceptor } from "./auth/interceptors/auth.interceptor";
 import { BaseUrlInterceptor } from "./auth/interceptors/base-url.interceptor";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withInterceptors([authInterceptor]), withInterceptorsFromDi()),
     { provide: "BASE_API_URL", useValue: "http://localhost:8080" },
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor }, provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    provideAnimationsAsync(),
   ],
 };
