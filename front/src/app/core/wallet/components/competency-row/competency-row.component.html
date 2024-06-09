@@ -28,7 +28,7 @@
   }
 </td>
 <td class="whitespace-nowrap px-3 py-4 text-sm font-light text-gray-700">
-  <app-competence-level-chip [skill]="subCompetence.skill" [isEditable]="isEditable"></app-competence-level-chip>
+  <app-competence-level-chip [skill]="subCompetence.skill" [isEditable]="isEditable" (updateSkillLevel)="editSkillLevel($event)"></app-competence-level-chip>
 </td>
 <td class="relative min-w-16 whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
   <span (click)="toggleEdit()" [ngClass]="isEditable ? 'cursor-pointer text-primary-600' : ' cursor-not-allowed text-gray-400'">

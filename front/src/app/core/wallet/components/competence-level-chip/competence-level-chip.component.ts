@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from "@angular/core";
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
 import { Skill } from "../../types/Skill.enum";
 import { CommonModule, KeyValue } from "@angular/common";
 
@@ -12,6 +12,8 @@ import { CommonModule, KeyValue } from "@angular/common";
 export class CompetenceLevelChipComponent implements OnInit {
   @Input({ required: true }) skill: Skill | null = null;
   @Input({ required: true }) isEditable: boolean = false;
+  @Output() updateSkillLevel: EventEmitter<Skill> = new EventEmitter();
+
   isExpanded: boolean = false;
   Skills = Skill;
 
@@ -33,7 +35,8 @@ export class CompetenceLevelChipComponent implements OnInit {
   }
 
   editCompetence(newSkill: Skill) {
-    this.skill = newSkill;
+    if (newSkill === this.skill) return;
+    this.updateSkillLevel.emit(newSkill);
   }
 
   @HostListener("document:click", ["$event"])
