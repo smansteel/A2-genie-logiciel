@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  lemon:
+    image: coudot/lemonldap-ng:latest
+    environment:
+      - LOGLEVEL=debug
+      - SSODOMAIN=test.local
+      - FASTCGI_LISTEN_PORT=9000
+      - PORTAL_HOSTNAME=myportal.test.local
+      - MANAGER_HOSTNAME=mymanager.test.local
+      - HANDLER_HOSTNAME=myhandler.test.local
+      - TEST1_HOSTNAME=mytest1.test.local
+      - TEST2_HOSTNAME=mytest2.test.local
+    expose:
+      - "9000:9000"

@@ -6,7 +6,6 @@ import fr.genepisep.icompetences.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,11 @@ public class SecurityController {
 
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDto login) throws FailedLoginException {
+        return ResponseEntity.ok(loginService.loginUser(login.getUsername(), login.getPassword()));
+    }
+
+    @PostMapping("signup")
+    public ResponseEntity<String> signup(@RequestBody LoginDto login) throws FailedLoginException {
         return ResponseEntity.ok(loginService.loginUser(login.getUsername(), login.getPassword()));
     }
 

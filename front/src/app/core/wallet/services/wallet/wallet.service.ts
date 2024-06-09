@@ -3,6 +3,11 @@ import { Wallet } from "../../types/Wallet.interface";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { firstValueFrom, lastValueFrom } from "rxjs";
+import { Skill } from "../../types/Skill.enum";
+import { SubCompetence } from "../../types/SubCompetence.interface";
+import { Competence } from "../../types/Competence.interface";
+import { NotificationsService } from "../../../../shared/services/notifications/notifications.service";
+import { NotificationType } from "../../../../shared/types/notification.type";
 
 @Injectable({
   providedIn: "root",
@@ -10,10 +15,13 @@ import { firstValueFrom, lastValueFrom } from "rxjs";
 export class WalletService {
   public wallet: WritableSignal<Wallet | null> = signal(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private notifications: NotificationsService,
+  ) {}
 
   public async fetchWallet(walletID: string): Promise<Wallet> {
-    const wallet : Wallet = await this.getFakeWallet();
+    const wallet: Wallet = await this.getFakeWallet();
     this.wallet.set(wallet);
     console.log("here");
     return wallet;
@@ -32,6 +40,46 @@ export class WalletService {
       return await firstValueFrom(this.http.patch<Wallet>("wallet/" + wallet.id, wallet));
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to edit wallet", error: error });
+    }
+  }
+
+  public async updateSubCompetence(competence: Competence, subCompetence: SubCompetence) {
+    const wallet = this.wallet();
+    if (!wallet) throw Error("No wallet to edit");
+
+    try {
+      return await firstValueFrom(
+        this.http.patch<SubCompetence>("wallet/" + wallet.id + "/" + competence.id + "/" + subCompetence.id, subCompetence),
+      );
+    } catch (error) {
+      this.notifications.add({
+        type: NotificationType.Error,
+        title: "Failed to edit '" + subCompetence.name + "'",
+        description: "Cliquez pour réessayer",
+        onClicAction: () => {
+          this.updateSubCompetence(competence, subCompetence);
+        },
+      });
+      throw new HttpErrorResponse({ statusText: "Failed to edit subCompetence", error: error });
+    }
+  }
+
+  public async updateCompetence(competence: Competence) {
+    const wallet = this.wallet();
+    if (!wallet) throw Error("No wallet to edit");
+
+    try {
+      return await firstValueFrom(this.http.patch<Competence>("wallet/" + wallet.id + "/" + competence.id, competence));
+    } catch (error) {
+      this.notifications.add({
+        type: NotificationType.Error,
+        title: "Failed to edit '" + competence.name + "'",
+        description: "Click to retry",
+        onClicAction: () => {
+          this.updateCompetence(competence);
+        },
+      });
+      throw new HttpErrorResponse({ statusText: "Failed to edit competence", error: error });
     }
   }
 
@@ -59,19 +107,19 @@ export class WalletService {
               id: 1,
               name: "Fonctionnement d'un microcontrôleur",
               description: "Comprendre le fonctionnement d'un microcontrôleur",
-              skill: null,
+              skill: Skill.CLOSE,
             },
             {
               id: 2,
               name: "Utilisation d'un multimètre",
               description: "Savoir utiliser un multimètre",
-              skill: null,
+              skill: Skill.BEYOND,
             },
             {
               id: 3,
               name: "Réalisation d'un circuit imprimé",
               description: "Savoir réaliser un circuit imprimé",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
             {
               id: 4,
@@ -83,7 +131,7 @@ export class WalletService {
               id: 5,
               name: "Soutenances",
               description: "Savoir présenter et vendre un projet",
-              skill: null,
+              skill: Skill.FAR,
             },
           ],
         },
@@ -96,13 +144,13 @@ export class WalletService {
               id: 1,
               name: "Algo de détéction de bruit",
               description: "Savoir réaliser un algorithme de détection de bruit sur Matlab",
-              skill: null,
+              skill: Skill.VERY_CLOSE,
             },
             {
               id: 2,
               name: "Traitement de signal",
               description: "Savoir traiter un signal",
-              skill: null,
+              skill: Skill.VERY_CLOSE,
             },
             {
               id: 3,
@@ -114,7 +162,7 @@ export class WalletService {
               id: 4,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
           ],
         },
@@ -127,13 +175,13 @@ export class WalletService {
               id: 1,
               name: "Pages statiques",
               description: "Réaliser les page de base d'un site web",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
             {
               id: 2,
               name: "Pages dynamiques",
               description: "Réaliser des pages dynamiques",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
             {
               id: 3,
@@ -145,13 +193,13 @@ export class WalletService {
               id: 4,
               name: "Sécurité",
               description: "Savoir sécuriser un site web et se protéger des attaques",
-              skill: null,
+              skill: Skill.BEYOND,
             },
             {
               id: 5,
               name: "Backend",
               description: "Savoir réaliser un backend en php",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
             {
               id: 6,
@@ -163,7 +211,7 @@ export class WalletService {
               id: 7,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.EXPECTED,
             },
           ],
         },
@@ -182,13 +230,13 @@ export class WalletService {
               id: 2,
               name: "Passerelle",
               description: "Faire communiquer la carte TIVA et le site web",
-              skill: null,
+              skill: Skill.CLOSE,
             },
             {
               id: 3,
               name: "Livrables",
               description: "Évaluation des rendus",
-              skill: null,
+              skill: Skill.VERY_CLOSE,
             },
           ],
         },
