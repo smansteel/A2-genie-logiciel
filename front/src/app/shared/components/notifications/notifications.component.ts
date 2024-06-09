@@ -20,4 +20,5 @@ export class NotificationsComponent {
       notification.onClicAction;
     }
   }
+
 }

@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { isNotLoggedInGuard } from "./auth/guards/is-not-logged-in.guard";
+//import { isNotLoggedInGuard } from "./auth/guards/is-not-logged-in.guard";
 
 export const routes: Routes = [
   {
@@ -18,6 +18,15 @@ export const routes: Routes = [
   {
     path: "wallet/:id",
     loadComponent: () => import("./core/wallet/components/wallet-page/wallet-page.component").then(m => m.WalletPageComponent),
+  },
+  {
+    path: "admin/modules",
+    loadComponent: () =>
+      import("./core/modules/components/module-config-page/module-config-page.component").then(m => m.ModuleConfigPageComponent),
+  },
+  {
+    path: "admin/module/:id",
+    loadComponent: () => import("./core/modules/components/module-page/module-page.component").then(m => m.ModulePageComponent),
   },
   {
     path: "**",

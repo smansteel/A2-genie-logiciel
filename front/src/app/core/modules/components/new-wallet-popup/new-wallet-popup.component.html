@@ -1,0 +1,11 @@
+<div class="w-full h-fit flex flex-col p-3 gap-1 items-center">
+
+  <h2 class="w-full text-center text-2xl"> Nouveau référentiel </h2>
+  <h4 class="w-full">Nom</h4>
+  <textarea cols="25" rows="1" #name class="resize-none rounded-xl"></textarea>
+  <h4 class="w-full">Description</h4>
+  <textarea cols="25" rows="1" #desc class="resize-none rounded-xl"></textarea>
+  <button class="bg-primary-500 rounded-xl w-1/2 p-2" [mat-dialog-close]="{name: name.value, description: desc.value }">
+    Ajouter
+  </button>
+</div>
