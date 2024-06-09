@@ -21,9 +21,16 @@ export class ModuleConfigPageComponent {
     private moduleService: ModuleService,
     private router: Router,
   ) {
-    this.moduleService.fetchModule("1").then(r => {
-      this.modules.push(r);
+    this.fetchModules().then(() => {
+      console.log("Modules fetched");
     });
+  }
+
+  async fetchModules() {
+    const modules = await this.moduleService.fetchModules();
+    if (modules) {
+      this.modules.push(...modules);
+    }
   }
 
   onNewModuleClk() {
@@ -31,12 +38,16 @@ export class ModuleConfigPageComponent {
 
     dia.afterClosed().subscribe(result => {
       if (result.name && result.description) {
-        this.modules.push({
+        const newModule: IsepModule = {
           id: (this.modules.length + 1).toString(),
           name: result.name,
           description: result.description,
           wallets: [],
-        } as IsepModule);
+        };
+        this.moduleService.addModule(newModule).then(() => {
+          console.log("Module succesfully added");
+          this.modules.push(newModule);
+        });
       }
     });
   }

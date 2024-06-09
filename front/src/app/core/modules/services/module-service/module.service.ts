@@ -9,6 +9,7 @@ import { IsepModule } from "../../../../shared/types/IsepModule.type";
 })
 export class ModuleService {
   public module: WritableSignal<IsepModule | null> = signal(null);
+  public modules: WritableSignal<IsepModule[]> = signal([]);
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +25,19 @@ export class ModuleService {
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to fetch module", error: error });
     }
+  }
+
+  public async fetchModules(): Promise<IsepModule[]> {
+    try {
+      const modules = await firstValueFrom(this.http.get<IsepModule[]>("module/"));
+      if (modules) {
+        this.modules.set(modules);
+        return modules;
+      }
+    } catch (error) {
+      throw new HttpErrorResponse({ statusText: "Failed to fetch module", error: error });
+    }
+    return [];
   }
 
   public async addModule(module: IsepModule): Promise<IsepModule> {

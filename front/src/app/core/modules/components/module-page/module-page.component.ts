@@ -42,6 +42,8 @@ export class ModulePageComponent {
         });
       }
     });
+
+    this.moduleService.editModule(this.module);
   }
 
   viewWallet(id: number) {
@@ -63,5 +65,7 @@ export class ModulePageComponent {
         };
       }
     });
+
+    this.moduleService.editModule(this.module);
   }
 }
