@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withInterceptors([authInterceptor]), withInterceptorsFromDi()),
     { provide: "BASE_API_URL", useValue: "http://localhost:8080" },
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }, provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor }, provideAnimationsAsync(),
   ],
 };
