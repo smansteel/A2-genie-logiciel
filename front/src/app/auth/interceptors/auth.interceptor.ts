@@ -6,7 +6,7 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
   if (req.url.match(/auth\//)) {
     return next(req);
   }
-  
+
   const authToken = inject(AuthService).getAccessToken();
   const headers = new HttpHeaders().set("Authorization", `Bearer ${authToken}`);
   const newReq = req.clone({ headers });
