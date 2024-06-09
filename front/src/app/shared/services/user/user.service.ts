@@ -51,4 +51,46 @@ export class UserService {
   private async fetchUser(): Promise<User> {
     return await firstValueFrom(this.http.get<User>("user"));
   }
+
+  public getFakeUserList() {
+    const userList = [
+      {
+        id: 1,
+        username: "jema00001",
+        firstName: "Jean",
+        name: "Martin",
+      },
+      {
+        id: 2,
+        username: "maco00002",
+        firstName: "Marc",
+        name: "Constant",
+      },
+      {
+        id: 3,
+        username: "luva00003",
+        firstName: "Luc",
+        name: "Varaut",
+      },
+      {
+        id: 4,
+        username: "addo00004",
+        firstName: "Adrien",
+        name: "D'Ormesson",
+      },
+      {
+        id: 5,
+        username: "jebo00005",
+        firstName: "Jean-Philippe",
+        name: "Bottéro",
+      },
+    ];
+
+    const randomTimeout = Math.floor(Math.random() * (400 - 200 + 1)) + 400;
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(userList);
+      }, randomTimeout);
+    });
+  }
 }
