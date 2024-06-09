@@ -56,7 +56,7 @@ export class ModulePageComponent {
     dia.afterClosed().subscribe(result => {
       if (result) {
         this.module.responsable = {
-          isepId: result.username,
+          username: result.username,
           id: result.id,
           name: result.name,
           firstName: result.firstName,

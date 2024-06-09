@@ -11,7 +11,7 @@ public class UserDto {
     private String name;
     private String firstname;
     private String email;
-    private String isepId;
+    private String username;
     private Date disableDate;
     private Role role;
 }

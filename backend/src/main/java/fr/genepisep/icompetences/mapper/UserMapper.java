@@ -13,7 +13,7 @@ public class UserMapper {
         userDto.setId(userEntity.getId());
         userDto.setName(userEntity.getName());
         userDto.setEmail(userEntity.getEmail());
-        userDto.setIsepId(userEntity.getIsepId());
+        userDto.setUsername(userEntity.getIsepId());
         userDto.setFirstname(userEntity.getFirstname());
         userDto.setDisableDate(userEntity.getDisableDate());
         return userDto;
