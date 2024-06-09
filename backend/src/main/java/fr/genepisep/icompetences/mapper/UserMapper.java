@@ -1,7 +1,7 @@
 package fr.genepisep.icompetences.mapper;
 
 
-import fr.genepisep.icompetences.dto.UserDto;
+import fr.genepisep.icompetences.entities.dto.UserDto;
 import fr.genepisep.icompetences.entities.dao.UserEntity;
 
 import java.util.ArrayList;

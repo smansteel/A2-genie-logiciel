@@ -1,11 +1,11 @@
-package fr.genepisep.icompetences.dto;
+package fr.genepisep.icompetences.entities.dto;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class CreateUserDto {
+public class UserDto {
     private Long id;
     private String name;
     private String firstname;

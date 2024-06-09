@@ -1,6 +1,6 @@
 package fr.genepisep.icompetences.controllers;
 
-import fr.genepisep.icompetences.dto.UserDto;
+import fr.genepisep.icompetences.entities.dto.UserDto;
 import fr.genepisep.icompetences.mapper.UserMapper;
 import fr.genepisep.icompetences.security.IsepSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;

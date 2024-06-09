@@ -1,6 +1,6 @@
 package fr.genepisep.icompetences.controllers;
 
-import fr.genepisep.icompetences.dto.LoginDto;
+import fr.genepisep.icompetences.entities.dto.LoginDto;
 import fr.genepisep.icompetences.services.JwtService;
 import fr.genepisep.icompetences.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package fr.genepisep.icompetences.dto;
+package fr.genepisep.icompetences.entities.dto;
 
 import lombok.Data;
 
