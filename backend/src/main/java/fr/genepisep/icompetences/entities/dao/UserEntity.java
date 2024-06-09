@@ -12,21 +12,16 @@ import java.util.Date;
 public class UserEntity implements Serializable {
     @Id
     @GeneratedValue
-    @Column
     private Long id;
-
-    @Column
     private String name;
-    @Column
     private String firstname;
-    @Column
     private String email;
     @Column(unique = true)
     private String isepId;
-    @Column
     private String passwordHash;
-
-    @Column
     private Date disableDate;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Role role;
 
 }

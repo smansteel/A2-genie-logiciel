@@ -30,7 +30,7 @@ public class WalletController {
     public WalletDto wallet(@PathVariable Long walletId, @RequestBody WalletDto walletDto) {
         Wallet wallet= walletRepository.findById(walletId).orElseThrow();
         wallet.setName(walletDto.getName());
-        wallet.setDescription(wallet.getDescription());
+        wallet.setDescription(walletDto.getDescription());
         wallet.setCompetencies(competencyService.updateCompetencies(walletDto.getCompetencies()));
         wallet.setAuthorizedEditors(userService.findAllUsersFromId(walletDto.getAuthorizedEditorsID()));
         walletRepository.save(wallet);

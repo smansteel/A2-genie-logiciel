@@ -1,5 +1,6 @@
 package fr.genepisep.icompetences.entities.dto;
 
+import fr.genepisep.icompetences.entities.dao.Role;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,4 +13,5 @@ public class UserDto {
     private String email;
     private String isepId;
     private Date disableDate;
+    private Role role;
 }
