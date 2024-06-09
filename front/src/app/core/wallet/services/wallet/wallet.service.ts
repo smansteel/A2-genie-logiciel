@@ -4,6 +4,10 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { firstValueFrom, lastValueFrom } from "rxjs";
 import { Skill } from "../../types/Skill.enum";
+import { SubCompetence } from "../../types/SubCompetence.interface";
+import { Competence } from "../../types/Competence.interface";
+import { NotificationsService } from "../../../../shared/services/notifications/notifications.service";
+import { NotificationType } from "../../../../shared/types/notification.type";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +15,10 @@ import { Skill } from "../../types/Skill.enum";
 export class WalletService {
   public wallet: WritableSignal<Wallet | null> = signal(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private notifications: NotificationsService,
+  ) {}
 
   public async fetchWallet(walletID: string): Promise<Wallet> {
     const wallet: Wallet = await this.getFakeWallet();
@@ -33,6 +40,46 @@ export class WalletService {
       return await firstValueFrom(this.http.patch<Wallet>("wallet/" + wallet.id, wallet));
     } catch (error) {
       throw new HttpErrorResponse({ statusText: "Failed to edit wallet", error: error });
+    }
+  }
+
+  public async updateSubCompetence(competence: Competence, subCompetence: SubCompetence) {
+    const wallet = this.wallet();
+    if (!wallet) throw Error("No wallet to edit");
+
+    try {
+      return await firstValueFrom(
+        this.http.patch<SubCompetence>("wallet/" + wallet.id + "/" + competence.id + "/" + subCompetence.id, subCompetence),
+      );
+    } catch (error) {
+      this.notifications.add({
+        type: NotificationType.Error,
+        title: "Failed to edit '" + subCompetence.name + "'",
+        description: "Cliquez pour réessayer",
+        onClicAction: () => {
+          this.updateSubCompetence(competence, subCompetence);
+        },
+      });
+      throw new HttpErrorResponse({ statusText: "Failed to edit subCompetence", error: error });
+    }
+  }
+
+  public async updateCompetence(competence: Competence) {
+    const wallet = this.wallet();
+    if (!wallet) throw Error("No wallet to edit");
+
+    try {
+      return await firstValueFrom(this.http.patch<Competence>("wallet/" + wallet.id + "/" + competence.id, competence));
+    } catch (error) {
+      this.notifications.add({
+        type: NotificationType.Error,
+        title: "Failed to edit '" + competence.name + "'",
+        description: "Click to retry",
+        onClicAction: () => {
+          this.updateCompetence(competence);
+        },
+      });
+      throw new HttpErrorResponse({ statusText: "Failed to edit competence", error: error });
     }
   }
 

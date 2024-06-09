@@ -23,7 +23,7 @@ export class CompetenceLevelChipComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(this.skill);
+    console.log(this.isEditable);
   }
 
   toggleEdit() {

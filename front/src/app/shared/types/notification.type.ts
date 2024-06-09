@@ -2,8 +2,7 @@ export type Notification = {
   type: NotificationType;
   title: string;
   description?: string;
-  primaryAction?: () => void;
-  secondaryAction?: () => void;
+  onClicAction?: () => void;
 };
 
 export enum NotificationType {
