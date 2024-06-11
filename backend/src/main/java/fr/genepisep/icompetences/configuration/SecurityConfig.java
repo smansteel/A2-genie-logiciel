@@ -3,7 +3,6 @@ package fr.genepisep.icompetences.configuration;
 import fr.genepisep.icompetences.services.IsepUserDetailsService;
 import org.apereo.cas.client.session.SingleSignOutFilter;
 import org.apereo.cas.client.validation.Cas30ServiceTicketValidator;
-import org.apereo.cas.client.validation.TicketValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
@@ -50,13 +49,15 @@ public class SecurityConfig {
         provider.setAuthenticationUserDetailsService(new UserDetailsByNameServiceWrapper<>(userDetailsService));
         provider.setServiceProperties(serviceProperties());
         provider.setTicketValidator(cas30ServiceTicketValidator());
-        provider.setKey("key");
+        provider.setKey("MyVerySuperSecretKey");
         return provider;
     }
 
     @Bean
-    public TicketValidator cas30ServiceTicketValidator() {
+    public Cas30ServiceTicketValidator cas30ServiceTicketValidator() {
         return new Cas30ServiceTicketValidator("https://portail-ovh.isep.fr/cas");
+
+
     }
 
     @Bean
