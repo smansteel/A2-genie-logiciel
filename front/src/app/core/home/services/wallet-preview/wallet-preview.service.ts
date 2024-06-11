@@ -9,7 +9,11 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 export class WalletPreviewService {
   walletPreviews: WritableSignal<WalletPreview[]> = signal([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getFakeWallet().then(wallets => {
+      this.walletPreviews.set(wallets);
+    });
+  }
 
   async fetchWallets() {
     try {
