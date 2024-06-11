@@ -8,3 +8,6 @@ db:
   string: ${db_string}
 
 jwt-secret: ${jwt_secret}
+
+server:
+  port: 16669

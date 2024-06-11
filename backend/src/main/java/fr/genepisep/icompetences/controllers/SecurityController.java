@@ -1,26 +1,20 @@
 package fr.genepisep.icompetences.controllers;
 
-import fr.genepisep.icompetences.entities.dto.LoginDto;
 import fr.genepisep.icompetences.services.JwtService;
 import fr.genepisep.icompetences.services.LoginService;
-import org.apereo.cas.client.validation.Cas30ServiceTicketValidator;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.cas.authentication.CasAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.FailedLoginException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.cert.X509Certificate;
-import java.security.spec.PKCS8EncodedKeySpec;
-
 @Controller
-@RequestMapping("auth")
-
 public class SecurityController {
 
     @Autowired
@@ -42,16 +36,11 @@ public class SecurityController {
 //        return ResponseEntity.ok(loginService.loginUser(login.getUsername(), login.getPassword()));
 //    }
 
-    @PostMapping("refresh")
+    @PostMapping("auth/refresh")
     public ResponseEntity<String> refresh(@RequestBody String refreshToken) {
         return ResponseEntity.ok("refresh");
     }
 
-    @GetMapping("login/cas")
-    public ResponseEntity<String> returnCas(@RequestParam String cas) throws Exception {
-        System.out.println(cas);
-        return ResponseEntity.ok("test");
-    }
 
 
 }
