@@ -3,6 +3,10 @@ import { Routes } from "@angular/router";
 
 export const routes: Routes = [
   {
+    path: "callback",
+    loadComponent: () => import("./auth/components/callback/callback.component").then(m => m.CallbackComponent),
+  },
+  {
     path: "login",
     loadComponent: () => import("./auth/components/login-form/login-form.component").then(m => m.LoginFormComponent),
   },

@@ -1,6 +1,6 @@
 import { Injectable, Signal, computed, isDevMode } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { lastValueFrom } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { firstValueFrom, lastValueFrom } from "rxjs";
 import { Router } from "@angular/router";
 import AccessToken from "../types/AccessToken.type";
 import jwt, { jwtDecode } from "jwt-decode";
@@ -37,7 +37,7 @@ export class AuthService {
         this.logout();
         return "Incorrect JWT";
       }
-    } catch (error : any) {
+    } catch (error: any) {
       console.error("HTTP Error:", error);
       return String(error.message);
     }
@@ -77,5 +77,22 @@ export class AuthService {
       isDevMode() && console.error("Failed to decode JWT");
       return false;
     }
+  }
+
+  public async sendTokenToAuth(token: string): Promise<string> {
+    console.log("sending token to backend");
+    try {
+      const jwt = await firstValueFrom(this.http.get<string>("auth/cas?ticket=" + token));
+      console.log("JWT");
+      return jwt;
+    } catch (error) {
+      throw new HttpErrorResponse({ statusText: "Failed to fetch", error: error });
+    }
+  }
+
+  public setJWT(jwt: string) {
+    this.accessToken = jwt;
+    window.localStorage.setItem("access_token", jwt);
+    console.log("JWT set");
   }
 }

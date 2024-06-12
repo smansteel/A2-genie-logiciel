@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor]), withInterceptorsFromDi()),
-    { provide: "BASE_API_URL", useValue: "http://localhost:8080" },
+    { provide: "BASE_API_URL", useValue: "https://api.icompetences.tardieu.info" },
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
   ],
 };
