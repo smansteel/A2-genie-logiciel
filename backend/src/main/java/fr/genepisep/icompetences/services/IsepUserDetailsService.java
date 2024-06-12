@@ -17,6 +17,7 @@ public class IsepUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
+        System.out.println("USERNAME : "+ username);
         UserEntity user = userRepository.findByIsepId(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return new IsepUserDetails(user);
     }

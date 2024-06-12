@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -31,7 +35,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain)
             throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
-        System.out.println(request.getHeader("Origin"));
 
         String username;
         String jwtToken;
@@ -47,28 +50,34 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
+            System.out.println("Validity : "+ jwtService.isTokenValid(jwtToken, userDetails));
             if (jwtService.isTokenValid(jwtToken, userDetails)) {
-
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
-                        null,
+                        userDetails.getPassword(),
                         userDetails.getAuthorities()
                 );
                 usernamePasswordAuthenticationToken
                         .setDetails(
-                                new WebAuthenticationDetailsSource()
-                                        .buildDetails(request)
+                            userDetails
                         );
+                request.getSession().setAttribute("authenticated", true);
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                chain.doFilter(request, response);
             }
         }
+        chain.doFilter(request, response);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getRequestURI().startsWith("/auth/");
+        boolean match = false;
+        String[] shouldNot = {"/auth/", "/login/", "/cas/"};
+        for(String elem : shouldNot){
+            if(request.getRequestURI().startsWith(elem)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

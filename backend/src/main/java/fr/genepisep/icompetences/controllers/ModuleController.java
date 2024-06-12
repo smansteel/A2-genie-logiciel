@@ -10,6 +10,7 @@ import fr.genepisep.icompetences.repository.UserRepository;
 import fr.genepisep.icompetences.services.UserService;
 import fr.genepisep.icompetences.services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import fr.genepisep.icompetences.entities.dao.Module;
@@ -26,6 +27,11 @@ public class ModuleController {
     UserRepository userRepository;
     @Autowired
     private WalletService walletService;
+
+    @GetMapping
+    public ResponseEntity<String> testModule(){
+        return ResponseEntity.ok("I am a module :)");
+    }
 
     @GetMapping("{module}")
     public ModuleDto getModule(@PathVariable Module module){

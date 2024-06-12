@@ -8,3 +8,15 @@ db:
   string: ${db_string}
 
 jwt-secret: ${jwt_secret}
+
+server:
+  port: 16669
+
+logging:
+  level:
+    org.springframework.security: TRACE
+#    org.apereo.cas.client.validation.AbstractUrlBasedTicketValidator: DEBUG
+#    org.apereo.cas.client.validation.Cas20ServiceTicketValidator: DEBUG
+#    org.apereo.cas.client.validation.Cas30ServiceTicketValidator: DEBUG
+#    org.springframework.security.cas: DEBUG
+#    org.apereo.cas: DEBUG
