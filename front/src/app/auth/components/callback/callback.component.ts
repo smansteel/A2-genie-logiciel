@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
@@ -15,6 +15,7 @@ export class CallbackComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
+    private router: Router,
   ) {}
 
   async ngOnInit() {
@@ -23,6 +24,7 @@ export class CallbackComponent implements OnInit {
       console.log(this.token);
       const jwt = await this.auth.sendTokenToAuth(this.token);
       this.auth.setJWT(jwt);
+      this.router.navigate(["/home"]);
     });
   }
 }
