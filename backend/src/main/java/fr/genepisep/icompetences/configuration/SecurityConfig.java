@@ -19,10 +19,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-//                        .requestMatchers("auth/cas").permitAll()
-                        .anyRequest().authenticated()
-                )
+//                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+////                        .requestMatchers("auth/cas").permitAll()
+//                        .anyRequest().authenticated()
+//                )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )

@@ -28,11 +28,6 @@ public class ModuleController {
     @Autowired
     private WalletService walletService;
 
-    @GetMapping
-    public ResponseEntity<String> testModule(){
-        return ResponseEntity.ok("I am a module :)");
-    }
-
     @GetMapping("{module}")
     public ModuleDto getModule(@PathVariable Module module){
         return ModuleMapper.toDto(module);
