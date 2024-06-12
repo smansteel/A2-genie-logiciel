@@ -6,69 +6,14 @@
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
     <div class="bg-white px-6 py-12 shadow !transition-all sm:rounded-lg sm:px-12">
-      <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
-        <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Identifiant Isep ou adresse email</label>
-          <div class="mt-2">
-            <input
-              id="email"
-              type="email"
-              autocomplete="email"
-              formControlName="email"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-          @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
-            <label class="text-sm font-normal text-red-600">Un identifiant ou email valide est obligatoire</label>
-          }
-        </div>
-
-        <div>
-          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Mot de passe</label>
-          <div class="mt-2">
-            <input
-              id="password"
-              type="password"
-              autocomplete="password"
-              formControlName="password"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-          @if (loginForm.get("password")?.errors && loginForm.get("password")?.touched) {
-            <label class="text-sm font-normal text-red-600">Un mot de passe est obligatoire</label>
-          }
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="text-sm leading-6">
-            <a (click)="forgotPassword()" class="cursor-pointer font-semibold text-primary-600 hover:text-primary-500"
-              >Mot de passe oublié ?</a
-            >
-          </div>
-        </div>
-
-        <div>
-          <a
-            href="https://portail-ovh.isep.fr/cas/login?service=https%3A%2F%2Ficompetences.tardieu.info%2Fcallback" 
-            class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-          >
-            SSO
-          </a>
-          <button
-            type="submit"
-            class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-          >
-            Se connecter
-          </button>
-        </div>
-      </form>
+      <div>
+        <a
+          href="https://portail-ovh.isep.fr/cas/login?service=https%3A%2F%2Ficompetences.tardieu.info%2Fcallback"
+          class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+        >
+          SSO
+        </a>
+      </div>
     </div>
-
-    <p class="mt-10 text-center text-sm text-gray-500">
-      Pas de compte ?
-      <a (click)="register()" class="cursor-pointer font-semibold leading-6 text-primary-600 hover:text-primary-500"
-        >Créez en un maintenant</a
-      >
-    </p>
   </div>
 </div>

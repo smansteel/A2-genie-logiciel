@@ -80,7 +80,7 @@ export class AuthService {
   }
 
   public async sendTokenToAuth(token: string): Promise<string> {
-    console.log("sending token to backend");
+    console.log("sending token to backend", token);
     try {
       const jwt = await firstValueFrom(this.http.get<string>("auth/cas?ticket=" + token));
       console.log("JWT");

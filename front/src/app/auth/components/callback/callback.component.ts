@@ -11,15 +11,18 @@ import { AuthService } from "../../services/auth.service";
 })
 export class CallbackComponent implements OnInit {
   token: string = "";
-  
+
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
   ) {}
 
   async ngOnInit() {
-    this.token = this.route.snapshot.params["ticket"];
-    const jwt = await this.auth.sendTokenToAuth(this.token);
-    this.auth.setJWT(jwt);
+    this.route.queryParams.subscribe(async params => {
+      this.token = params["ticket"]; // Assuming the parameter name is 'ticket'
+      console.log(this.token);
+      const jwt = await this.auth.sendTokenToAuth(this.token);
+      this.auth.setJWT(jwt);
+    });
   }
 }
